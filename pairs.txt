@@ -1,0 +1,103 @@
+"""
+I will give a question and a conetxt and you will provode the sql to answer the question, no text before no text after just the sql code:
+
+Question: Which employees have birthdays febuary
+
+Context:
+
+
+CREATE TABLE Employees (
+    employee_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    birth_date DATE,
+    department TEXT
+);
+
+SQL:
+
+"""
+
+
+
+
+
+"""
+I will give a question and a conetxt and you will provode the sql to answer the question, no text before no text after just the sql code:
+Question: Find the average price of items sold by department.
+Context:
+
+-- Create Departments Table
+CREATE TABLE Departments (
+    department_id INTEGER PRIMARY KEY,
+    department_name TEXT NOT NULL
+);
+
+-- Create Items Table
+CREATE TABLE Items (
+    item_id INTEGER PRIMARY KEY,
+    name TEXT NOT NULL,
+    department_id INTEGER,
+    price DECIMAL(10, 2),
+    FOREIGN KEY (department_id) REFERENCES Departments(department_id)
+);
+SQL:
+
+"""
+
+
+
+
+Question: List all transactions over $1000 made last year.
+Context:
+-- Create Transactions Table
+CREATE TABLE Transactions (
+    transaction_id INTEGER PRIMARY KEY,
+    amount DECIMAL(10, 2),
+    transaction_date DATE
+);
+SQL:
+
+
+
+
+
+
+
+
+
+
+Question: How many books are available in each genre?
+Context:
+
+-- Create Books Table
+CREATE TABLE Books (
+    book_id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    available BOOLEAN
+);
+SQL:
+
+
+
+
+
+
+
+
+
+
+Question: What is the average order value this month?
+Context:
+-- Create Orders Table
+CREATE TABLE Orders (
+    order_id INTEGER PRIMARY KEY,
+    customer_id INTEGER,
+    product_id INTEGER,
+    order_date DATE,
+    quantity INTEGER,
+    total_price DECIMAL(10, 2),
+    FOREIGN KEY (customer_id) REFERENCES Customers(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Products(product_id)
+);
+SQL:

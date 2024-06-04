@@ -1,0 +1,69 @@
+ case DatabaseEnum.SQLSERVER:
+            pass
+            server = data_info.get('host')
+            database = data_info.get('name')
+            username = data_info.get('username')
+            password = data_info.get('password')
+            port = data_info.get('port')
+            db_id = data_info.get('id')
+
+            connection_string = f'DRIVER={{ODBC Driver 17 for SQL Server}};SERVER={server},{port};DATABASE={database};UID={username};PWD={password}'
+            db_type = "SQL Server"
+            dataInfo = {"db_name": database, "db_type": db_type}  # Maintain this for consistency
+
+            try:
+                conn = pyodbc.connect(connection_string)
+                cursor = conn.cursor()
+                schema = ""
+                data = ""
+
+                # Fetch table schema information
+                tables = cursor.execute(
+                    "SELECT table_name FROM information_schema.tables WHERE table_schema = 'dbo' AND table_type = 'BASE TABLE';").fetchall()
+
+                for table in tables:
+                    table_name = table[0]
+                    create_table_query = "CREATE TABLE " + table_name + " (\n"
+
+                    columns = cursor.execute(
+                        f"SELECT column_name, data_type, character_maximum_length, is_nullable FROM information_schema.columns WHERE table_name = '{table_name}';").fetchall()
+                    column_descriptions = []
+
+                    for column in columns:
+                        column_name, data_type, char_len, nullable = column
+                        nullable_str = " NOT NULL" if nullable == "NO" else ""
+                        char_len_str = f"({char_len})" if char_len else ""
+                        column_descriptions.append(f"    {column_name} {data_type}{char_len_str}{nullable_str}")
+
+                    create_table_query += ",\n".join(column_descriptions) + "\n);"
+                    schema += create_table_query + "\n\n"
+
+                    # Fetch sample data
+                    cursor.execute(f"SELECT TOP 30 * FROM {table_name}")
+                    rows = cursor.fetchall()
+                    data_samples = [dict(zip([column[0] for column in cursor.description], row)) for row in rows]
+                    data += f"Table: {table_name}\n" + str(data_samples) + "\n\n"
+
+                cursor.close()
+                conn.close()
+
+                schemaDoc = Document(page_content=schema,
+                                     metadata={"source": f"{database} database - SQL Server", "type": "STRUCTURED"})
+                dataDoc = Document(page_content=data,
+                                   metadata={"source": f"{database} database - SQL Server", "type": "UNSTRUCTURED"})
+
+                return dataDoc, schemaDoc, dataInfo
+
+            except pyodbc.Error as e:
+                print(f"Error connecting to SQL Server: {e}")
+                return None, None, None  # Ensure return is consistent
+
+
+
+
+
+
+
+
+
+

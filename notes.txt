@@ -1,0 +1,236 @@
+postgresql+psycopg2://onegateUser:a0K07Klvg@onegate-db.cz0ah7kejghx.us-east-1.rds.amazonaws.com:5432/test_vecteur_db
+
+onegate-db.cz0ah7kejghx.us-east-1.rds.amazonaws.com
+onegateUser
+a0K07Klvg
+test_vecteur_db
+5432
+
+
+ostgresql+psycopg2://peaqock:peAqockPostgres312@peaqock.com:54320/one_gate_vector_db_sandbox
+
+
+
+
+CSV and excel loader
+metadata : type : S ot US
+
+
+database payload SQL SERVER:
+
+
+{
+  "data": [
+    {
+      "data_source_type": "DATABASE",
+      "id": "05-09-2024-1",
+      "host": "data.peaqock.com",
+      "name": "Peaqock",
+      "password": "SecretP@ssw0rd",
+      "port": "60041",
+      "type": "SQLSERVER",
+      "username": "sa",
+      "api_key": "string",
+      "email": "string",
+      "token": "string",
+      "workspace_url": "string",
+      "integration": "string",
+      "path": "string",
+      "client_email": "string",
+      "clientx509cert_url": "string",
+      "client_id": "string",
+      "private_key": "string",
+      "private_key_id": "string",
+      "project_id": "string"
+    }
+  ]
+}
+
+
+database payload SQL POSTGRES:
+
+
+{
+  "data": [
+    {
+      "data_source_type": "DATABASE",
+      "id": "aff093c1-6105-480f-84ef-b24a73b806d9",
+      "host": "data.peaqock.com",
+      "name": "retail_banking",
+      "password": "rootroot",
+      "port": "60045",
+      "type": "POSTGRESQL",
+      "username": "postgres",
+      "api_key": "string",
+      "email": "string",
+      "token": "string",
+      "workspace_url": "string",
+      "integration": "string",
+      "path": "string",
+      "client_email": "string",
+      "clientx509cert_url": "string",
+      "client_id": "string",
+      "private_key": "string",
+      "private_key_id": "string",
+      "project_id": "string"
+    }
+  ]
+}
+
+
+palyload Hana
+
+{
+  "data": [
+    {
+      "data_source_type": "DATABASE",
+      "id": "GHY-6105-480f-84ef-b24a73b806d9",
+      "host": "data.peaqock.com",
+      "name": "SYS",
+      "password": " FiXd*E9bZcDdEld=JtYB",
+      "port": "39017",
+      "type": "SAP",
+      "username": "SYSTEM",
+      "api_key": "string",
+      "email": "string",
+      "token": "string",
+      "workspace_url": "string",
+      "integration": "string",
+      "path": "string",
+      "client_email": "string",
+      "clientx509cert_url": "string",
+      "client_id": "string",
+      "private_key": "string",
+      "private_key_id": "string",
+      "project_id": "string"
+    }
+  ]
+}
+
+
+
+files payload:
+
+{
+  "data": [
+    {
+      "data_source_type": "FILE",
+      "id": "tuesday21-5-1",
+      "host": "string",
+      "name": "string",
+      "password": "string",
+      "port": "string",
+      "type": "EXCEL",
+      "username": "string",
+      "api_key": "string",
+      "email": "string",
+      "token": "string",
+      "workspace_url": "string",
+      "integration": "string",
+      "path": "https://api-preprod.onegate.ai/api/storage/public/20240520011814657_extraction_bo-ev_260920222_(2).xlsx",
+      "client_email": "string",
+      "clientx509cert_url": "string",
+      "client_id": "string",
+      "private_key": "string",
+      "private_key_id": "string",
+      "project_id": "string"
+    }
+  ]
+}
+
+
+
+{
+  "data": [
+    {
+      "data_source_type": "FILE",
+      "id": "tuesday21-solveddddd",
+      "host": "string",
+      "name": "string",
+      "password": "string",
+      "port": "string",
+      "type": "EXCEL",
+      "username": "string",
+      "api_key": "string",
+      "email": "string",
+      "token": "string",
+      "workspace_url": "string",
+      "integration": "string",
+      "path": "https://api-preprod.onegate.ai/api/storage/public/20240520034729797_extraction_bo-ev_260920222.xlsx",
+      "client_email": "string",
+      "clientx509cert_url": "string",
+      "client_id": "string",
+      "private_key": "string",
+      "private_key_id": "string",
+      "project_id": "string"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        # case FileEnum.EXCEL:
+        #     print("treating EXCEL file now ....")
+        #     if is_from_s3(urls[0]) or validate_url(urls[0]) == str(FileEnum.EXCEL.value) or validate_google_file(
+        #             urls[0]) == str(FileEnum.EXCEL.value):
+        #         if re.match(r'https://docs\.google\.com/spreadsheets/d/([a-zA-Z0-9-_]+)(/edit#gid=(\d+)|/edit.*)?',
+        #                     urls[0]):
+        #             urls[0] = urls[0].split('#')[0]
+        #
+        #         tables_df = read_excel(urls[0])
+        #         sheets_not_valid = []
+        #         sheets_valid = []
+        #         schema = ""
+        #
+        #         for key, value in tables_df.items():
+        #             if 'Unnamed: 1' in value.columns:
+        #                 sheets_not_valid.append(key)
+        #             else:
+        #                 sheets_valid.append(key)
+        #                 schema += get_schema_of_data_frame(value, key) + "\n"
+        #
+        #         print("Complete Schema:", schema)  # Debugging print
+        #
+        #         database_dao.upsert(db_id,
+        #                             {"db_type": "EXCEL", "path": urls[0], "db_id": db_id, "valid_sheets": sheets_valid,
+        #                              "db_schema": schema, "is_mongo": False})
+        #         dataObject = []
+        #
+        #         for sheet_name, df in tables_df.items():
+        #             chunk_content = df.to_string(index=False, header=True)
+        #             dataObject.append(chunk_content)
+        #
+        #         data_string = "\n\n".join(dataObject)
+        #         schema_document = Document(page_content=schema, metadata={"source": urls[0], "type": "STRUCTURED"})
+        #         data_document=Document(page_content=data_string, metadata={"source": urls[0], "type": "UNSTRUCTURED"})
+        #
+        #         data=[schema_document,data_document]
+        #         size = sum([sys.getsizeof(i.page_content) for i in data])
+        #         if size > MAX_DOC_SIZE_BYTES:
+        #             return False
+        #         return data, {"valid_sheets": sheets_valid, "invalid_sheets": sheets_not_valid}
+        #     else:
+        #         return "Invalid URL"
+
